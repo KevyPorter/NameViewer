@@ -18,6 +18,17 @@ public class NameViewer {
 		if (apiResponse.equalsIgnoreCase("")) {
 			return;
 		}
+		if(apiResponse.replace('"', ' ').replace(" ", "").equalsIgnoreCase("{success:false,cause:Internal error}")){
+			Utils.SetText("Internal Error.\nTry again in a few moments!");
+		}
+		if (apiResponse.replace('"', ' ').replace(" ", "").equalsIgnoreCase("{cause:Keythrottle!,throttle:true,success:false}"))
+	    {
+	      Utils.SetText("Please try again in a few moments!\nThe API key got used to much!");return;
+	    }
+	    if (apiResponse.replace('"', ' ').replace(" ", "").contains("player:null"))
+	    {
+	      Utils.SetText("Player '" + field.getText() + "' not found!");return;
+	    }
 		getName(apiResponse, map);
 	}
 
@@ -29,7 +40,6 @@ public class NameViewer {
 			if(s.startsWith("knownAliases")){
 				map.put(Integer.valueOf(0), "Names: " + s.replace("knownAliases:", "").replace(".", ", ") + ".");
 			}
-			Utils.Loading();
 		}
 		Utils.SetText(Utils.MapToString(map));
 	}
