@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 
 public class Main {
 
+	// version 2.0
 	public static JFrame frame;
 	public static TextArea text;
 	public static JLabel label;
