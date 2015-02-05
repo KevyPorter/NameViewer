@@ -27,14 +27,13 @@ public class Utils {
 		    }
 		    catch (IOException e)
 		    {
-		      SetText("API is either down, or key was overused, sorry ;-;\nRetry in a minute or two :)");
+		      SetText("API is either down, or key was overused, sorry ;-;\nRetry in a minute or two :)\n\n\nError Message:" + e.getMessage());
 		    }
 
 		return api;
 	}
 	
-	protected static String MapToString(Map<Integer, String> map)
-	  {
+	protected static String MapToString(Map<Integer, String> map){
 	    String t = "";
 	    for (int i = 0; i <= map.size(); i++) {
 	      t = t + (String)map.get(Integer.valueOf(i)) + "\n";
@@ -43,14 +42,12 @@ public class Utils {
 	    return t;
 	  }
 	
-	protected static void SetText(String input)
-	  {
+	protected static void SetText(String input){
 	    Main.text.setText(null);
 	    Main.text.setText(input);
 	  }
 	
-	protected static void Loading()
-	  {
+	protected static void loading(){
 	    Main.text.setText(null);
 	    Main.text.setText("Loading...");
 	  }
