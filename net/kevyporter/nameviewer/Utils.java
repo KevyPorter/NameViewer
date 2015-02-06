@@ -10,10 +10,10 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class Utils {
 
-	protected static String getAPI(String player){
+	protected static String getUUID(String player){
 		String api = "";
 		try{
-			URL u = new URL("https://api.hypixel.net/player?key=026105d9-80c3-424a-b84e-4043d3e8dd56&name=" + player);
+			URL u = new URL("https://api.mojang.com/users/profiles/minecraft/" + player);
 			HttpsURLConnection con = (HttpsURLConnection)u.openConnection();
 		      con.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36");
 		      
@@ -27,9 +27,30 @@ public class Utils {
 		    }
 		    catch (IOException e)
 		    {
-		      SetText("API is either down, or key was overused, sorry ;-;\nRetry in a minute or two :)\n\n\nError Message:" + e.getMessage());
+		      SetText("Error: " + e.getMessage());
 		    }
-
+		return api;
+	}
+	
+	protected static String getNames(String id){
+		String api = "";
+		try{
+			URL u = new URL("https://api.mojang.com/user/profiles/" + id + "/names");
+			HttpsURLConnection con = (HttpsURLConnection)u.openConnection();
+		      con.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36");
+		      
+		      BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		      String input;
+		      while ((input = br.readLine()) != null)
+		      {
+		        api = api + input;
+		      }
+		      br.close();
+		    }
+		    catch (IOException e)
+		    {
+		      SetText("Error: " + e.getMessage());
+		    }
 		return api;
 	}
 	
