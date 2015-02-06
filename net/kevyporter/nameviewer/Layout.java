@@ -31,6 +31,8 @@ public class Layout {
 				new ImageIcon(
 						Toolkit.getDefaultToolkit().createImage(Layout.class.getResource("/net/kevyporter/nameviewer/background.png")))));
 		
+		// TODO: Image Icon
+		
 		return frame;
 	}
 
